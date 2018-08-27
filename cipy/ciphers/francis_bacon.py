@@ -21,7 +21,6 @@ def decrypt(inp: str, a: str = "A", b: str = "B", short: bool = False) -> str:
         Decides whether or not you want to use the 24 letter alphabet.
     """
     if len(inp) % 5 != 0:
-        print(f"Your input must have a length of a multiple of 5.\n Your length: {len(inp)}")
         return None
 
     # turning the input into binary data
