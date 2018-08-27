@@ -4,7 +4,7 @@ ROT Cipher
 This file provides functionality for dealing with ROT ciphers
 """
 
-def encipher(msg: str, key: int, alphabet="abcdefghijklmnopqrstuvwxyz": str):
+def encipher(msg: str, key: int, alphabet: str="abcdefghijklmnopqrstuvwxyz"):
     """
     Encipher a message using a ROT encryption
 
