@@ -48,8 +48,6 @@ def encrypt(inp: str, a: str = "A", b: str = "B", short: bool = False) -> str:
     else:
         bin_values = [bin(LETTERS_LONG.index(x))[2:] for x in inp]
     # fill the strings until theyre of length 5
-    # for x in range(len(bin_values)):
-    #     bin_values[x] = "0" * (5 - len(bin_values[x])) + bin_values[x]
     for i, x in enumerate(bin_values):
         bin_values[i] = "0" * (5 - len(x)) + x
     ret = "".join(bin_values).replace("0", a).replace("1", b)
