@@ -8,12 +8,17 @@ LETTERS_SHORT = "ABCDEFGHIKLMNOPQRSTUWXYZ"
 def decrypt(inp: str, a: str = "A", b: str = "B", short: bool = False) -> str:
     """
     Decrypts a given message
-    Parameters:
-        inp     : the string you want to decrypt
-        a       : the character you want to use for "A"s
-        b       : the character you want to use for "B"s
-        short   : True if you want to use the 24 character alphabet, otherwise
-                  you use the 26 letter alphabet. Defaults to False.
+
+    Parameters
+    ----------
+    inp: str
+        The text you want to encrypt
+    a: str
+        The character you want to use as the "A"
+    b: str
+        The character you want to use as the "B"
+    short: bool
+        Decides whether or not you want to use the 24 letter alphabet.
     """
     if len(inp) % 5 != 0:
         print(f"Your input must have a length of a multiple of 5.\n Your length: {len(inp)}")
@@ -35,12 +40,17 @@ def decrypt(inp: str, a: str = "A", b: str = "B", short: bool = False) -> str:
 def encrypt(inp: str, a: str = "A", b: str = "B", short: bool = False) -> str:
     """
     Encrypts a given message
-    Parameters:
-        inp     : the string you want to encrypt
-        a       : the character you want to use for "A"s
-        b       : the character you want to use for "B"s
-        short   : True if you want to use the 24 character alphabet, otherwise
-                  you use the 26 letter alphabet. Defaults to False.
+
+    Parameters
+    ----------
+    inp: str
+        The text you want to decrypt
+    a: str
+        The character you want to use as the "A"
+    b: str
+        The character you want to use as the "B"
+    short: bool
+        Decides whether or not you want to use the 24 letter alphabet.
     """
     inp = inp.upper()
     if short:
