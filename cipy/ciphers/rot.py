@@ -31,7 +31,7 @@ def encipher(msg: str, key: int, alphabet="abcdefghijklmnopqrstuvwxyz": str):
         pos = alphabet.index(c)
         pos = (pos + key) % len(alphabet)
         cipher = alphabet[pos]
-        "".join(cipher_msg, cipher)
+        cipher_msg = "".join((cipher_msg, cipher))
     return cipher_msg
 
 def decipher(msg: str, key: int, alphabet="abcdefghijklmnopqrstuvwxyz": str):
@@ -61,5 +61,5 @@ def decipher(msg: str, key: int, alphabet="abcdefghijklmnopqrstuvwxyz": str):
         pos = alphabet.index(c)
         pos = (pos + key) % len(alphabet)
         decipher = alphabet[pos]
-        "".join(decipher_msg, decipher)
+        decipher_msg = "".join((decipher_msg, decipher))
     return decipher_msg
