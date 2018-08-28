@@ -4,11 +4,8 @@ Provides encryption and decryption with the atbash cipher
 import string
 
 # create alphabet dict
-ALPHABET = {}
-for i, letter in enumerate(string.ascii_lowercase):
-    ALPHABET[letter] = string.ascii_lowercase[-i-1]
-for i, letter in enumerate(string.ascii_uppercase):
-    ALPHABET[letter] = string.ascii_uppercase[-i-1]
+ALPHABET = dict([(c, string.ascii_lowercase[-i-1]) for i, c in enumerate(string.ascii_lowercase)])
+ALPHABET.update(dict([(c, string.ascii_uppercase[-i-1]) for i, c in enumerate(string.ascii_uppercase)]))
 
 
 def encrypt(inp: str) -> str:
