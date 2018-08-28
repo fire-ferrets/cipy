@@ -12,10 +12,10 @@ class Alphabet():
         self._alphabet_to_numbers = dict((v, k) for k,v in self._numbers_to_alphabet)
 
     def __len__(self):
-        return len(self.length)
+        return self.length
 
     def __len_hint__(self):
-        return len(self.length)
+        return self.length
 
     def __getitem__(self, key):
         if key in self._numbers_to_alphabet:
