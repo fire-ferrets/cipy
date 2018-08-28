@@ -61,8 +61,8 @@ def encrypt(inp: str, dot: str = ".", dash: str = "-", space: str = "/") -> str:
     space: str
         The character you want to represent a space
     """
-    letters = [TEXT_TO_MORSE[x].replace("0", dash).replace("1", dot).replace("2", space) for x in inp.upper()]
-    return " ".join(letters)
+    letters = [TEXT_TO_MORSE[x] for x in inp.upper()]
+    return " ".join(letters).replace("0", dash).replace("1", dot).replace("2", space)
 
 
 def decrypt(inp: str, dot: str = ".", dash: str = "-", space: str = "/") -> str:
@@ -80,5 +80,6 @@ def decrypt(inp: str, dot: str = ".", dash: str = "-", space: str = "/") -> str:
     space: str
         The character you want to represent a space
     """
-    letters = [MORSE_TO_TEXT[x.replace(dash, "0").replace(dot, "1").replace(space, "2")] for x in inp.split(" ")]
+    inp = inp.replace(dash, "0").replace(dot, "1").replace(space, "2")
+    letters = [MORSE_TO_TEXT[x] for x in inp.split(" ")]
     return "".join(letters)
