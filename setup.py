@@ -19,4 +19,6 @@ setuptools.setup(
             "License :: something :: something",
             "Operating System :: OS Independent",
         ],
+        setup_requires=["pytest-runner"],
+        tests_require=["pytest"],
 )
