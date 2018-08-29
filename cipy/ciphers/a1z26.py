@@ -16,7 +16,7 @@ def encrypt(inp: str) -> str:
     inp: str
         The text you want to encrypt
     """
-    if not inp.replace(" ", "").isalpha():
+    if not all(x.isalpha() or x.isspace() for x in inp):
         return None
     inp = inp.upper()
     numbers = [str(ALPHABET.index(x)) for x in inp]
@@ -32,7 +32,7 @@ def decrypt(inp: str) -> str:
     inp: str
         The text you want to decrypt
     """
-    if not inp.replace(" ", "").isdigit():
+    if not all(x.isdigit() or x.isspace() for x in inp):
         return None
     letters = [ALPHABET[int(x)] for x in inp.split(" ")]
     return "".join(letters)
