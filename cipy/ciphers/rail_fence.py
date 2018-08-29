@@ -5,11 +5,11 @@ Allows you to encrypt and decrypt text with the rail fence cipher
 """
 
 
-def _get_indices(inp: str, key: int) -> list:
+def _get_indices(msg: str, key: int) -> list:
     """
-    Gets encrypted indice to a given input and key.
+    Gets encrypted indice to a given message and key.
 
-    Returns a list of rows with the indice of the input letters
+    Returns a list of rows with the indice of the msgut letters
     if they were encrypted.
     The list will be in the format
     [[index1, index2, ...], [index3, index4, ...], ...]
@@ -17,12 +17,12 @@ def _get_indices(inp: str, key: int) -> list:
 
     Parameters
     ----------
-    inp: str
-        The input string
+    msg: str
+        The message string
     key: int
-        The key to en / decrypt
+        The key to en- / decrypt
     """
-    length = len(inp)
+    length = len(msg)
     dif_first_row = 2 * key - 2
     indice = [[] for i in range(key)]
     # calculate indice for text splitting
@@ -36,45 +36,43 @@ def _get_indices(inp: str, key: int) -> list:
     return indice
 
 
-def encrypt(inp: str, key: int) -> str:
+def encrypt(msg: str, key: int) -> str:
     """
-    Encrypts a given input with the rail fence cipher and a provided key
+    Encrypt a message using a Rail Fence encryption
 
     Parameters
     ----------
-    inp: str
-        The input string
+    msg: str
+        The message you want to encrypt
     key: int
         The key to encrypt
     """
-    inp = inp.strip()
-    indice = _get_indices(inp, key)
+    msg = msg.strip()
+    indice = _get_indices(msg, key)
     ret = ""
     for row in indice:
         for index in row:
-            ret += inp[index]
+            ret += msg[index]
     return ret
 
 
-def decrypt(inp: str, key: int) -> str:
+def decrypt(msg: str, key: int) -> str:
     """
-    Decrypts a given input with the rail fence cipher and a provided key
+    Decrypt a message that is Rail Fence encrypted
 
     Parameters
     ----------
-    inp: str
-        The input string
+    msg: str
+        The message you want to decrypt
     key: int
         The key to decrypt
     """
-    inp = inp.strip()
-    indice = _get_indices(inp, key)
+    msg = msg.strip()
+    indice = _get_indices(msg, key)
     all_indice = []
     for x in indice:
         all_indice += x
     ret = ""
-    for i in range(len(inp)):
-        ret += inp[all_indice.index(i)]
+    for i in range(len(msg)):
+        ret += msg[all_indice.index(i)]
     return ret
-
-print(encrypt("12345678", 3))

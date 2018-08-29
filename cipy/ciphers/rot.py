@@ -6,7 +6,7 @@ This file provides functionality for dealing with ROT ciphers
 
 def encrypt(msg: str, key: int, alphabet: str="abcdefghijklmnopqrstuvwxyz") -> str:
     """
-    Encipher a message using a ROT encryption
+    Encrypt a message using a ROTX encryption
 
     This function enciphers a provided message with a given key
     by using a ROT encryption.
@@ -14,7 +14,7 @@ def encrypt(msg: str, key: int, alphabet: str="abcdefghijklmnopqrstuvwxyz") -> s
     Parameters
     ----------
     msg : string
-        The message that is to be enciphered
+        The message you want to encrypt
     key : int
         The amount of shifting to be done
     alphabet : string
@@ -24,7 +24,7 @@ def encrypt(msg: str, key: int, alphabet: str="abcdefghijklmnopqrstuvwxyz") -> s
     Returns
     -------
     string
-        The enciphered message
+        The encrypted message
     """
     cipher_msg = ""
     for c in msg:
@@ -36,7 +36,7 @@ def encrypt(msg: str, key: int, alphabet: str="abcdefghijklmnopqrstuvwxyz") -> s
 
 def decrypt(msg: str, key: int, alphabet: str="abcdefghijklmnopqrstuvwxyz") -> str:
     """
-    Decipher a message with a ROT encryption
+    Decrypt a message that is ROTX encrypted
 
     This function enciphers a provided message with a given key
     by using a ROT encryption.
@@ -44,7 +44,7 @@ def decrypt(msg: str, key: int, alphabet: str="abcdefghijklmnopqrstuvwxyz") -> s
     Parameters
     ----------
     msg : string
-        The message that is to be deciphered
+        The message you want to decrypt
     key : int
         The amount of shifting that has been done
     alphabet : string
@@ -54,7 +54,7 @@ def decrypt(msg: str, key: int, alphabet: str="abcdefghijklmnopqrstuvwxyz") -> s
     Returns
     -------
     string
-        The deciphered message
+        The decrypted message
     """
     decipher_msg = ""
     for c in msg:

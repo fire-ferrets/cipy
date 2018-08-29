@@ -46,13 +46,13 @@ TEXT_TO_MORSE = {
 MORSE_TO_TEXT = {k: v for v, k in TEXT_TO_MORSE.items()}
 
 
-def encrypt(inp: str, dot: str = ".", dash: str = "-", space: str = "/") -> str:
+def encrypt(msg: str, dot: str = ".", dash: str = "-", space: str = "/") -> str:
     """
-    Encrypts a given input with the Morse cipher
+    Encrypt a message using Morse code
 
     Parameters
     ----------
-    inp: str
+    msg: str
         The text you want to encrypt
     dot: str
         The character you want to represent a dot
@@ -61,18 +61,18 @@ def encrypt(inp: str, dot: str = ".", dash: str = "-", space: str = "/") -> str:
     space: str
         The character you want to represent a space
     """
-    letters = [TEXT_TO_MORSE[x] for x in inp.upper()]
+    letters = [TEXT_TO_MORSE[x] for x in msg.upper()]
     return " ".join(letters).replace("0", dash).replace("1", dot).replace("2", space)
 
 
-def decrypt(inp: str, dot: str = ".", dash: str = "-", space: str = "/") -> str:
+def decrypt(msg: str, dot: str = ".", dash: str = "-", space: str = "/") -> str:
     """
-    Encrypts a given input with the Morse cipher
+    Decrypt a message that is written in Morse code
 
     Parameters
     ----------
-    inp: str
-        The text you want to encrypt
+    msg: str
+        The message you want to encrypt
     dot: str
         The character you want to represent a dot
     dash: str
@@ -80,6 +80,6 @@ def decrypt(inp: str, dot: str = ".", dash: str = "-", space: str = "/") -> str:
     space: str
         The character you want to represent a space
     """
-    inp = inp.replace(dash, "0").replace(dot, "1").replace(space, "2")
-    letters = [MORSE_TO_TEXT[x] for x in inp.split(" ")]
+    msg = msg.replace(dash, "0").replace(dot, "1").replace(space, "2")
+    letters = [MORSE_TO_TEXT[x] for x in msg.split(" ")]
     return "".join(letters)

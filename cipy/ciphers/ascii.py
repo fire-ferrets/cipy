@@ -5,25 +5,25 @@ Allows you to encrypt and decrypt text using the ASCII cipher
 """
 
 
-def encrypt(inp: str) -> str:
+def encrypt(msg: str) -> str:
     """
-    Encrypts a given input with the ascii cipher
+    Encrypt a message using an ASCII encryption
 
     Parameters
     ----------
-    inp: str
-        The text you want to encrypt
+    msg: str
+        The message you want to encrypt
     """
-    return " ".join([str(ord(x)) for x in inp])
+    return " ".join([str(ord(x)) for x in msg])
 
 
-def decrypt(inp: str) -> str:
+def decrypt(msg: str) -> str:
     """
-    Decrypts a given input with the ascii cipher
+    Decrypt a message that is ASCII encrypted
 
     Parameters
     ----------
-    inp: str
-        The text you want to decrypt
+    msg: str
+        The message you want to decrypt
     """
-    return "".join([chr(int(x)) for x in inp.split(" ")])
+    return "".join([chr(int(x)) for x in msg.split(" ")])

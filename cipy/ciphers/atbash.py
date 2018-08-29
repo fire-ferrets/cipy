@@ -8,27 +8,27 @@ ALPHABET = {c: string.ascii_lowercase[-i-1] for i, c in enumerate(string.ascii_l
 ALPHABET.update({c: string.ascii_uppercase[-i-1] for i, c in enumerate(string.ascii_uppercase)})
 
 
-def encrypt(inp: str) -> str:
+def encrypt(msg: str) -> str:
     """
-    Encrypts a given input with the atbash cipher
+    Encrypt a message using an Atbash encryption
 
     Parameters
     ----------
-    inp: str
-        The text you want to encrypt
+    msg: str
+        The message you want to encrypt
     """
-    if not inp.isalpha():
+    if not msg.isalpha():
         return None
-    return "".join([ALPHABET[x] for x in inp])
+    return "".join([ALPHABET[x] for x in msg])
 
 
-def decrypt(inp: str) -> str:
+def decrypt(msg: str) -> str:
     """
-    Decrypts a given input with the atbash cipher
+    Decrypt a message that is Atbash encrypted
 
     Parameters
     ----------
-    inp: str
-        The text you want to decrypt
+    msg: str
+        The message you want to decrypt
     """
-    return encrypt(inp)
+    return encrypt(msg)
