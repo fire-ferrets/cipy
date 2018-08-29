@@ -7,32 +7,32 @@ import string
 ALPHABET = " " + string.ascii_uppercase
 
 
-def encrypt(inp: str) -> str:
+def encrypt(msg: str) -> str:
     """
-    Encrypts a given input text
+    Encrypt a message using a A1Z26 encryption
 
     Parameters
     ----------
-    inp: str
-        The text you want to encrypt
+    msg: str
+        The message you want to encrypt
     """
-    if not all(x.isalpha() or x.isspace() for x in inp):
+    if not all(x.isalpha() or x.isspace() for x in msg):
         return None
-    inp = inp.upper()
-    numbers = [str(ALPHABET.index(x)) for x in inp]
+    msg = msg.upper()
+    numbers = [str(ALPHABET.index(x)) for x in msg]
     return " ".join(numbers)
 
 
-def decrypt(inp: str) -> str:
+def decrypt(msg: str) -> str:
     """
-    Decrypts a given input text
+    Decrypt a message that is A1Z26 encrypted
 
     Parameters
     ----------
-    inp: str
-        The text you want to decrypt
+    msg: str
+        The message you want to decrypt
     """
-    if not all(x.isdigit() or x.isspace() for x in inp):
+    if not all(x.isdigit() or x.isspace() for x in msg):
         return None
-    letters = [ALPHABET[int(x)] for x in inp.split(" ")]
+    letters = [ALPHABET[int(x)] for x in msg.split(" ")]
     return "".join(letters)
