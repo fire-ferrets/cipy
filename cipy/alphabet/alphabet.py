@@ -6,7 +6,6 @@ the encryption and decryption functions for the ciphers with a performance
 boost.
 """
 
-import itertools
 
 class Alphabet():
     def __init__(self, alphabet):
@@ -42,22 +41,13 @@ class Alphabet():
         raise KeyError("Key not found in Alphabet")
 
     def __iter__(self):
-        iterable = itertools.chain(
-                self._numbers_to_alphabet.keys(),
-                self._alphabet_to_numbers.keys())
-        return iterable
+        return self._alphabet_to_numbers.items()
 
     def __reversed__(self):
-        iterable = itertoo.chain(
-                reversed(self._numbers_to_alphabet.keys()),
-                reversed(self._alphabet_to_numbers.keys())
-                )
-        return iterable
+        return reversed(self._alphabet_to_numbers.keys())
 
     def __contains__(self, item):
-        if item in self._numbers_to_alphabet.keys():
-            return True
-        elif item in self._alphabet_to_numbers.keys():
+        if item in self._alphabet_to_numbers.keys():
             return True
         else:
             return False
