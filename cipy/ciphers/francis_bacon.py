@@ -23,10 +23,10 @@ def decrypt(msg: str, a: str = "A", b: str = "B", short: bool = False) -> str:
     if len(msg) % 5 != 0:
         return None
 
-    # turning the msgut into binary data
-    binary_msgut = msg.replace(a, "0").replace(b, "1")
-    # splitting the msgut into blocks of length 5
-    splits = [binary_msgut[i:i+5] for i in range(0, len(binary_input), 5)]
+    # turning the input into binary data
+    binary_input = msg.replace(a, "0").replace(b, "1")
+    # splitting the input into blocks of length 5
+    splits = [binary_input[i:i+5] for i in range(0, len(binary_input), 5)]
     # calculating integer values from binary blocks
     values = [int(x, 2) for x in splits]
     if short:
