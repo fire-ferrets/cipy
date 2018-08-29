@@ -29,11 +29,11 @@ def decrypt(inp: str, a: str = "A", b: str = "B", short: bool = False) -> str:
     splits = [binary_input[i:i+5] for i in range(0, len(binary_input), 5)]
     # calculating integer values from binary blocks
     values = [int(x, 2) for x in splits]
-    result_long = "".join(LETTERS_LONG[x] for x in values)
-    result_short = "".join(LETTERS_SHORT[x] for x in values)
     if short:
-        return result_short
-    return result_long
+        result = "".join(LETTERS_SHORT[x] for x in values)
+    else:
+        result = "".join(LETTERS_LONG[x] for x in values)
+    return result
 
 
 def encrypt(inp: str, a: str = "A", b: str = "B", short: bool = False) -> str:
