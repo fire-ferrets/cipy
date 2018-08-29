@@ -5,14 +5,14 @@ LETTERS_LONG = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 LETTERS_SHORT = "ABCDEFGHIKLMNOPQRSTUWXYZ"
 
 
-def decrypt(inp: str, a: str = "A", b: str = "B", short: bool = False) -> str:
+def decrypt(msg: str, a: str = "A", b: str = "B", short: bool = False) -> str:
     """
-    Decrypts a given message
+    Decrypt a message that is encrypted using a Francis Bacon cipher
 
     Parameters
     ----------
-    inp: str
-        The text you want to encrypt
+    msg: str
+        The message you want to decrypt
     a: str
         The character you want to use as the "A"
     b: str
@@ -20,11 +20,11 @@ def decrypt(inp: str, a: str = "A", b: str = "B", short: bool = False) -> str:
     short: bool
         Decides whether or not you want to use the 24 letter alphabet.
     """
-    if len(inp) % 5 != 0:
+    if len(msg) % 5 != 0:
         return None
 
     # turning the input into binary data
-    binary_input = inp.replace(a, "0").replace(b, "1")
+    binary_input = msg.replace(a, "0").replace(b, "1")
     # splitting the input into blocks of length 5
     splits = [binary_input[i:i+5] for i in range(0, len(binary_input), 5)]
     # calculating integer values from binary blocks
@@ -36,14 +36,14 @@ def decrypt(inp: str, a: str = "A", b: str = "B", short: bool = False) -> str:
     return result
 
 
-def encrypt(inp: str, a: str = "A", b: str = "B", short: bool = False) -> str:
+def encrypt(msg: str, a: str = "A", b: str = "B", short: bool = False) -> str:
     """
-    Encrypts a given message
+    Encrypt a message using a Francis Bacon cipher
 
     Parameters
     ----------
-    inp: str
-        The text you want to decrypt
+    msg: str
+        The message you want to encrypt
     a: str
         The character you want to use as the "A"
     b: str
@@ -51,11 +51,11 @@ def encrypt(inp: str, a: str = "A", b: str = "B", short: bool = False) -> str:
     short: bool
         Decides whether or not you want to use the 24 letter alphabet.
     """
-    inp = inp.upper()
+    msg = msg.upper()
     if short:
-        bin_values = [bin(LETTERS_SHORT.index(x))[2:] for x in inp]
+        bin_values = [bin(LETTERS_SHORT.index(x))[2:] for x in msg]
     else:
-        bin_values = [bin(LETTERS_LONG.index(x))[2:] for x in inp]
+        bin_values = [bin(LETTERS_LONG.index(x))[2:] for x in msg]
     # fill the strings until theyre of length 5
     for i, x in enumerate(bin_values):
         bin_values[i] = "0" * (5 - len(x)) + x

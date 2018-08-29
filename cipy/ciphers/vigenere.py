@@ -5,25 +5,25 @@ Allows you to encrypt and decrypt text with the Vigenere cipher
 """
 
 
-def encrypt(inp: str, key: str) -> str:
+def encrypt(msg: str, key: str) -> str:
     """
-    Encrypts a given input text with a given key
+    Encrypt a message using a Vigenere encryption
 
     Parameters
     ----------
-    inp: str
-        The text you want to encrypt
+    msg: str
+        The message you want to encrypt
     key: str
         The key you want to use to encrypt
     """
-    if not inp.replace(" ", "a").isalpha() or not key.isalpha():
+    if not msg.replace(" ", "a").isalpha() or not key.isalpha():
         return None
-    inp = inp.upper()
+    msg = msg.upper()
     key = key.upper()
     key_length = len(key)
     secret = ""
     skip = 0
-    for i, letter in enumerate(inp):
+    for i, letter in enumerate(msg):
         if letter == " ":
             secret += " "
             skip += 1
@@ -32,25 +32,25 @@ def encrypt(inp: str, key: str) -> str:
     return secret
 
 
-def decrypt(inp: str, key: str) -> str:
+def decrypt(msg: str, key: str) -> str:
     """
-    Decrypts a given text with a given key
+    Decrypt a message that is Vigenere encrypted
 
     Parameters
     ----------
-    inp: str
-        The text you want to decrypt
+    msg: str
+        The message you want to decrypt
     key: str
         The key you want to use to decrypt
     """
-    if not inp.replace(" ", "a").isalpha() or not key.isalpha():
+    if not msg.replace(" ", "a").isalpha() or not key.isalpha():
         return None
-    inp = inp.upper()
+    msg = msg.upper()
     key = key.upper()
     key_length = len(key)
     plain = ""
     skip = 0
-    for i, letter in enumerate(inp):
+    for i, letter in enumerate(msg):
         if letter == " ":
             plain += " "
             skip += 1
