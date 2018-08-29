@@ -1,21 +1,36 @@
 """
-This file provides some basic alphabets for ciphering
+The Alphabet class provides a general framework to embed alphabets
+
+It takes a string of the chosen alphabet as attribute. This provides
+the encryption and decryption functions for the ciphers with a performance
+boost.
 """
 
 import itertools
 
 class Alphabet():
     def __init__(self, alphabet):
+        """
+        Initialise an Alphabet
+
+        Attributes
+        ----------
+        alphabet : str
+            The alphabet string
+        """
         self.alphabet = alphabet
-        self.length = len(alphabet)
+        self._length = len(alphabet)
         self._numbers_to_alphabet = dict(enumerate(self.alphabet))
-        self._alphabet_to_numbers = dict((v, k) for k,v in self._numbers_to_alphabet)
+        self._alphabet_to_numbers = dict((v, k) for k,v in self._numbers_to_alphabet.items())
+
+    def __repr__(self):
+        return self.alphabet
 
     def __len__(self):
-        return self.length
+        return self._length
 
     def __len_hint__(self):
-        return self.length
+        return self._length
 
     def __getitem__(self, key):
         if key in self._numbers_to_alphabet:
