@@ -29,10 +29,10 @@ def _get_indices(inp: str, key: int) -> list:
     indice[0] = [x for x in range(0, length, dif_first_row)]
     for x in range(1, key):
         for y in indice[0]:
-            if y - x > 0 and y - x not in indice[x]:
-                indice[x].append(y - x)
             if y + x < length and y + x not in indice[x]:
                 indice[x].append(y + x)
+            if y + dif_first_row - x < length and y + dif_first_row - x not in indice[x]:
+                indice[x].append(y + dif_first_row -x)
     return indice
 
 
@@ -76,3 +76,5 @@ def decrypt(inp: str, key: int) -> str:
     for i in range(len(inp)):
         ret += inp[all_indice.index(i)]
     return ret
+
+print(encrypt("12345678", 3))
