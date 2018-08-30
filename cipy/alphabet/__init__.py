@@ -1,1 +1,1 @@
-from alphabet import *
+from .alphabet import *
