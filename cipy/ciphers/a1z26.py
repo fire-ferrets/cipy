@@ -4,6 +4,7 @@ A1Z26 Cipher
 Allows you to encrypt and decrypt text with the A1Z26 cipher
 """
 import string
+from .. import alphabet
 ALPHABET = " " + string.ascii_uppercase
 
 
