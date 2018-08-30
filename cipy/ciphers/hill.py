@@ -4,7 +4,7 @@ Hill Cipher
 Allows you to encrypt and decrypt messages with the Hill cipher
 """
 import numpy as np
-from .. import alphabet
+from .. import alphabet as alphb
 
 
 def encrypt(msg: str, key: np.ndarray, alphabet: str) -> str:
@@ -20,15 +20,12 @@ def encrypt(msg: str, key: np.ndarray, alphabet: str) -> str:
     alphabet : str
         The alphabet you want to use
     """
-    A = alphabet.Alphabet(alphabet)
-    msg_vector = np.array([A[c] for c in msg])[:, np.newaxis]
-    crypt_mat = np.dot(key, msg_vector)
-    def mat_mod(x):
-        return A[x % len(key)]
-
-    mat_mod = np.vectorize(mat_mod)
-    crypt_msg = mat_mod(crypt_mat)
-    return "".join([c for c in crypt_msg])
+    A = alphb.Alphabet(alphabet)
+    msg_vector = np.array([A[c] for c in msg])
+    crypt_mat = np.dot(msg_vector, key).astype(int)
+    crypt_msg = [A[c % len(alphabet)] for c in crypt_mat]
+    print("crypt_msg", crypt_msg)
+    return "".join(crypt_msg)
 
 
 def decrypt(msg: str, key: np.ndarray, alphabet: str) -> str:
