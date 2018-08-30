@@ -1,11 +1,11 @@
 import pytest
 import string
 from hypothesis import given
-from hypothesis.strategies import text
+from hypothesis.strategies import text, data
 
 from cipy.ciphers.rail_fence import *
 
-ALPHABET = string.ascii_letters
-@given(text(alphabet=ALPHABET, min_size=5))
-def test_inversion_rail_fence(s):
-    assert decrypt(encrypt(s,3), 3) == s
+@given(data=data())
+def test_inversion_rail_fence(data, ascii_letters):
+    msg = data.draw(text(alphabet=ascii_letters, min_size=5))
+    assert decrypt(encrypt(msg, 3), 3) == msg

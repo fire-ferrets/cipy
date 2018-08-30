@@ -1,11 +1,11 @@
 import pytest
 import string
 from hypothesis import given
-from hypothesis.strategies import text
+from hypothesis.strategies import text, data
 
 from cipy.ciphers.rot import *
 
-ALPHABET = string.ascii_lowercase
-@given(text(alphabet=ALPHABET))
-def test_inversion_rot(s):
-    assert decrypt(encrypt(s, 13), 13) == s
+@given(data=data())
+def test_inversion_rot(data, ascii_low):
+    msg = data.draw(text(alphabet=ascii_low))
+    assert decrypt(encrypt(msg, 13), 13) == msg

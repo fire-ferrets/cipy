@@ -1,11 +1,11 @@
 import pytest
 import string
 from hypothesis import given
-from hypothesis.strategies import text
+from hypothesis.strategies import text, data
 
 from cipy.ciphers.morse import *
 
-ALPHABET = "".join((string.ascii_uppercase, string.digits, " "))
-@given(text(alphabet=ALPHABET, min_size=1))
-def test_inversion_morse(s):
-    assert decrypt(encrypt(s)) == s
+@given(data=data())
+def test_inversion_morse(data, morse_letters):
+    msg = data.draw(text(alphabet=morse_letters, min_size=1))
+    assert decrypt(encrypt(msg)) == msg
