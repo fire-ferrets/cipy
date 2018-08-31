@@ -6,6 +6,32 @@ Allows you to encrypt and decrypt messages with the Hill cipher
 import numpy as np
 from .. import alphabet as alphb
 
+def _mod_inverse(a, n):
+    t, newt = 0, 1
+    r, newr = n, a
+    while newr != 0:
+        quotient = r % newr
+        t, newt = newt, t - quotient * newt
+        r, newr = newr, r - quotient * newr
+    if r > 1:
+        return "a is not invertible"
+    elif t < 0:
+        t = t + n
+    return t
+
+
+def _mod_inv_matrix(matrix, m):
+    det = int(np.linalg.det(matrix))
+    print(det)
+    cofactor = (np.linalg.inv(matrix).T * det).astype(int)
+    inv = _mod_inverse(det, m)
+    print(cofactor)
+    print(inv)
+    inv_matrix = inv * cofactor
+    inv_matrix = np.mod(inv_matrix, m)
+    return inv_matrix
+
+
 
 def encrypt(msg: str, key: np.ndarray, alphabet: str) -> str:
     """
@@ -42,6 +68,6 @@ def decrypt(msg: str, key: np.ndarray, alphabet: str) -> str:
     alphabet : str
         The alphabet you want to ues
     """
-    key = np.linalg.inv(key)
+    key = _mod_inv_matrix(key, len(key))
     return encrypt(msg, key, alphabet)
 
