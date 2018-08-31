@@ -6,7 +6,7 @@ from hypothesis.strategies import text, data
 from cipy.ciphers.hill import *
 
 @given(data=data())
-def test_inversion_hill(data, ascii_letters, matrix):
-    msg = data.draw(text(alphabet=ascii_letters, min_size=3, max_size=3))
-    assert decrypt(encrypt(msg, matrix, ascii_letters), matrix, ascii_letters) == msg
+def test_inversion_hill(data, ascii_upper, matrix):
+    msg = data.draw(text(alphabet=ascii_upper, min_size=3, max_size=3))
+    assert decrypt(encrypt(msg, matrix, ascii_upper), matrix, ascii_upper) == msg
 
