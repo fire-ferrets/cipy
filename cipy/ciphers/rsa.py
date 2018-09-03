@@ -36,8 +36,8 @@ def _check_if_prime(num: int) -> bool:
         return False
     if num == 2:
         return True
-    for x in xrange(3, int(math.sqrt(num)), 2):
-        if num % n == 0:
+    for x in range(3, int(math.sqrt(num)), 2):
+        if num % x == 0:
             return False
     return True
 
@@ -73,7 +73,7 @@ def decrypt(msg: str, n: int, d: int) -> str:
         the secret exponent d of your private key
     """
     plain_msg = "".join(chr((x ** d) % n) for x in msg.split(" "))
-    return secret_msg
+    return plain_msg
 
 
 def gen_keypair() -> dict:
