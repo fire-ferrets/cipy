@@ -85,7 +85,7 @@ def gen_keypairs(key_length: int) -> tuple:
     Parameters
     ----------
     key_length : int
-        the desired length of your keys
+        the desired length of your keys in bits
 
     Returns
     -------
@@ -94,7 +94,7 @@ def gen_keypairs(key_length: int) -> tuple:
         ==
         (public, private)
     """
-    # generate p and q as random primes with key_length bytes
+    # generate p and q as random primes with key_length bits
     p = secrets.randbits(key_length)
     while not _check_if_prime(p):
         p = secrets.randbits(key_length)
