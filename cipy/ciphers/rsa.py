@@ -5,6 +5,7 @@ Allows you to encrypt and decrypt text with the RSA cipher
 At the moment only allows to encrypt ASCII text
 """
 import math
+import random
 
 
 def _gcd(a: int, b: int) -> int:
@@ -87,4 +88,15 @@ def gen_keypairs() -> tuple:
         ==
         (public, private)
     """
-    pass
+    # generating p & q is WIP
+    p = 0
+    q = 0
+    n = p * q
+    phi_n = (p - 1) * (q - 1)
+    e = random.randrange(1, phi)
+    while _gcd(e, phi) != 1:
+        e = random.randrange(1, phi)
+    # calculating d from e is WIP
+    d = 0
+    return((n, e), (d, e))
+
