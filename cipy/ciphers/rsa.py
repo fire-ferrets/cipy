@@ -6,6 +6,7 @@ At the moment only allows to encrypt ASCII text
 """
 import math
 import random
+import secrets
 
 
 def _gcd(a: int, b: int) -> int:
@@ -77,9 +78,14 @@ def decrypt(msg: str, n: int, d: int) -> str:
     return plain_msg
 
 
-def gen_keypairs() -> tuple:
+def gen_keypairs(key_length: int) -> tuple:
     """
     Generates a keypair
+
+    Parameters
+    ----------
+    key_length : int
+        the desired length of your keys
 
     Returns
     -------
@@ -88,15 +94,21 @@ def gen_keypairs() -> tuple:
         ==
         (public, private)
     """
-    # generating p & q is WIP
-    p = 0
-    q = 0
+    # generate p and q as random primes with key_length bytes
+    p = secrets.randbits(key_length)
+    while not _check_if_prime(p):
+        p = secrets.randbits(key_length)
+    q = secrets.randbits(key_length)
+    while not _check_if_prime(q):
+        q = secrets.randbits(key_length)
+        while(q == p):
+            q = secrets.randbits(key_length)
+    # calculate n, phi(n), e and d from p and q
     n = p * q
     phi_n = (p - 1) * (q - 1)
-    e = random.randrange(1, phi)
-    while _gcd(e, phi) != 1:
-        e = random.randrange(1, phi)
+    e = random.randrange(1, phi_n)
+    while _gcd(e, phi_n) != 1:
+        e = random.randrange(1, phi_n)
     # calculating d from e is WIP
     d = 0
     return((n, e), (d, e))
-
