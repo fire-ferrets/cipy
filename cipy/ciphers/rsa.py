@@ -56,7 +56,7 @@ def encrypt(msg: str, n: int, e: int) -> str:
     e : int
         the public exponent e of your public key
     """
-    secret_msg = " ".join([(ord(x) ** e) % n for x in msg])
+    secret_msg = " ".join([math.pow(ord(x), e, n) for x in msg])
     return secret_msg
 
 
@@ -73,7 +73,7 @@ def decrypt(msg: str, n: int, d: int) -> str:
     d : int
         the secret exponent d of your private key
     """
-    plain_msg = "".join(chr((x ** d) % n) for x in msg.split(" "))
+    plain_msg = "".join(chr(math.pow(x, d, n)) for x in msg.split(" "))
     return plain_msg
 
 
