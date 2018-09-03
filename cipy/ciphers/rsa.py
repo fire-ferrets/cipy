@@ -76,12 +76,15 @@ def decrypt(msg: str, n: int, d: int) -> str:
     return plain_msg
 
 
-def gen_keypair() -> dict:
+def gen_keypairs() -> tuple:
     """
     Generates a keypair
 
     Returns
     -------
-    t: (n, e, d)
+    t : tuple
+        ((n, e), (n, d))
+        ==
+        (public, private)
     """
     pass
