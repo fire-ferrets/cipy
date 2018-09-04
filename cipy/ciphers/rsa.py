@@ -25,6 +25,23 @@ def _gcd(a: int, b: int) -> int:
     return a
 
 
+def _xgcd_x(a: int, b: int) -> tuple:
+    prevx, x = 1, 0
+    prevy, y = 0, 1
+    while b:
+        q = a//b
+        x, prevx = prevx - q * x, x
+        y, prevy = prevy - q * y, y
+        a, b = b, a % b
+    return prevx
+
+
+def _multiplicative_inverse(a: int, b: int) -> int:
+    x = _xgcd_x(a, b)
+    print(x)
+    return x % b
+
+
 def _check_if_prime(num: int) -> bool:
     """
     Check whether a natural number is a prime
@@ -57,7 +74,7 @@ def encrypt(msg: str, n: int, e: int) -> str:
     e : int
         the public exponent e of your public key
     """
-    secret_msg = " ".join([math.pow(ord(x), e, n) for x in msg])
+    secret_msg = " ".join([str(pow(ord(x), e, n)) for x in msg])
     return secret_msg
 
 
@@ -74,7 +91,7 @@ def decrypt(msg: str, n: int, d: int) -> str:
     d : int
         the secret exponent d of your private key
     """
-    plain_msg = "".join(chr(math.pow(x, d, n)) for x in msg.split(" "))
+    plain_msg = "".join(chr(pow(int(x), d, n)) for x in msg.split(" "))
     return plain_msg
 
 
@@ -97,7 +114,7 @@ def gen_keypairs(key_length: int) -> tuple:
     # generate p and q as random primes with key_length bits
     p = secrets.randbits(key_length)
     while not _check_if_prime(p):
-        p = secrets.randbits(key_length)
+        p += 1
     q = secrets.randbits(key_length)
     while not _check_if_prime(q):
         q = secrets.randbits(key_length)
@@ -110,5 +127,9 @@ def gen_keypairs(key_length: int) -> tuple:
     while _gcd(e, phi_n) != 1:
         e = random.randrange(1, phi_n)
     # calculating d from e is WIP
-    d = 0
-    return((n, e), (d, e))
+    d = _multiplicative_inverse(e, phi_n)
+    return((n, e), (n, d))
+
+kp = gen_keypairs(20)
+print(decrypt(encrypt("Hello World!", kp[0][0], kp[0][1]), kp[1][0], kp[1][1]))
+print(encrypt("Hello World!", kp[0][0], kp[0][1]))
