@@ -25,21 +25,26 @@ def _gcd(a: int, b: int) -> int:
     return a
 
 
-def _xgcd_x(a: int, b: int) -> tuple:
+def _multiplicative_inverse(a: int, m: int) -> int:
+    """
+    Calculate the modular multiplicative inverse of a number to a modulus
+
+    Parameters
+    ----------
+    a : int
+        the number you want to calculate the multiplicative inverse of
+    m : int
+        the modulus you want to calculate the multiplicative inverse to
+    """
+    original_m = m
     prevx, x = 1, 0
     prevy, y = 0, 1
-    while b:
-        q = a//b
+    while m:
+        q = a // m
         x, prevx = prevx - q * x, x
         y, prevy = prevy - q * y, y
-        a, b = b, a % b
-    return prevx
-
-
-def _multiplicative_inverse(a: int, b: int) -> int:
-    x = _xgcd_x(a, b)
-    print(x)
-    return x % b
+        a, m = m, a % m
+    return prevx % original_m
 
 
 def _check_if_prime(num: int) -> bool:
@@ -95,7 +100,7 @@ def decrypt(msg: str, n: int, d: int) -> str:
     return plain_msg
 
 
-def gen_keypairs(key_length: int) -> tuple:
+def gen_keypair(key_length: int) -> tuple:
     """
     Generates a keypair
 
@@ -113,11 +118,15 @@ def gen_keypairs(key_length: int) -> tuple:
     """
     # generate p and q as random primes with key_length bits
     p = secrets.randbits(key_length)
-    while not _check_if_prime(p):
+    if p % 2 == 0:
         p += 1
+    while not _check_if_prime(p):
+        p += 2
     q = secrets.randbits(key_length)
+    if q % 2 == 0:
+        q += 1
     while not _check_if_prime(q):
-        q = secrets.randbits(key_length)
+        q += 2
         while(q == p):
             q = secrets.randbits(key_length)
     # calculate n, phi(n), e and d from p and q
@@ -126,10 +135,5 @@ def gen_keypairs(key_length: int) -> tuple:
     e = random.randrange(1, phi_n)
     while _gcd(e, phi_n) != 1:
         e = random.randrange(1, phi_n)
-    # calculating d from e is WIP
     d = _multiplicative_inverse(e, phi_n)
     return((n, e), (n, d))
-
-kp = gen_keypairs(20)
-print(decrypt(encrypt("Hello World!", kp[0][0], kp[0][1]), kp[1][0], kp[1][1]))
-print(encrypt("Hello World!", kp[0][0], kp[0][1]))
