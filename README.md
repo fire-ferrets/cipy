@@ -19,5 +19,5 @@ Currently implemented ciphers are:
 + Vigenere Cipher
 
 ## Contributing
-This is currently a free time project by the @fire-ferrets (@whzup and @fairu1024). If
+This is currently a free time project by the fire-ferrets (whzup and fairu1024). If
 you want to contribute in any amount you're welcome to so!
