@@ -6,11 +6,11 @@ Allows you to encrypt and decrypt messages with the Hill cipher
 import numpy as np
 from .. import alphabet as alphb
 
-def _mod_inverse(a, n):
+def _mod_inverse(a: int, n: int) -> int:
     t, newt = 0, 1
     r, newr = n, a
     while newr != 0:
-        quotient = r % newr
+        quotient = r // newr
         t, newt = newt, t - quotient * newt
         r, newr = newr, r - quotient * newr
     if r > 1:
@@ -20,15 +20,12 @@ def _mod_inverse(a, n):
     return t
 
 
-def _mod_inv_matrix(matrix, m):
-    det = int(np.linalg.det(matrix))
-    print(det)
-    cofactor = (np.linalg.inv(matrix).T * det).astype(int)
-    inv = _mod_inverse(det, m)
-    print(cofactor)
-    print(inv)
+def _mod_inv_matrix(matrix: np.ndarray, m: int) -> np.ndarray:
+    det = np.linalg.det(matrix)
+    cofactor = np.linalg.inv(matrix).T * det
+    inv = _mod_inverse(int(det), m)
     inv_matrix = inv * cofactor
-    inv_matrix = np.mod(inv_matrix, m)
+    inv_matrix = np.around(np.mod(inv_matrix, m)).astype(int).T
     return inv_matrix
 
 
@@ -48,9 +45,8 @@ def encrypt(msg: str, key: np.ndarray, alphabet: str) -> str:
     """
     A = alphb.Alphabet(alphabet)
     msg_vector = np.array([A[c] for c in msg])
-    crypt_mat = np.dot(msg_vector, key).astype(int)
-    crypt_msg = [A[c % len(alphabet)] for c in crypt_mat]
-    print("crypt_msg", crypt_msg)
+    crypt_mat = np.mod(np.dot(key, msg_vector).astype(int), len(A))
+    crypt_msg = [A[c] for c in crypt_mat]
     return "".join(crypt_msg)
 
 
@@ -68,6 +64,6 @@ def decrypt(msg: str, key: np.ndarray, alphabet: str) -> str:
     alphabet : str
         The alphabet you want to ues
     """
-    key = _mod_inv_matrix(key, len(key))
+    key = _mod_inv_matrix(key, len(alphabet))
     return encrypt(msg, key, alphabet)
 
